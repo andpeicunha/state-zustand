@@ -1,28 +1,26 @@
+import { useShallow } from "zustand/react/shallow";
 import "./App.css";
-
-import { useStore } from "./store/bookStore";
+import { ButtonAdd } from "./component/button/buttonAdd";
+import { ButtonRemove } from "./component/button/buttonRemove";
+import useStoreCount from "./store/bookStore";
 
 function App() {
-  const { count, inc, dec } = useStore();
-
+  // const { count } = useStoreCount(
+  //   (state) => ({
+  //     count: state.count,
+  //   }),
+  //   shallow
+  // );
+  const { count } = useStoreCount(
+    useShallow((state) => ({ count: state.count }))
+  );
+  
   return (
-    <div className="flex flex-col h-full w-full justify-between">
-      <span className="pt-3">Contagem dos Números: {count}</span>
+    <div className="flex flex-col h-full w-full justify-between text-white">
+      <span className="pt-3 text-2xl">Contagem dos Números: {count}</span>
       <div className="p-3">
-        <button
-          className="bg-slate-500 p-2 rounded-lg text-cyan-50"
-          onClick={inc}
-        >
-          Adiciona
-        </button>
-      </div>
-      <div className="p-3">
-        <button
-          className="bg-slate-500 p-2 rounded-lg text-cyan-50"
-          onClick={dec}
-        >
-          Remove
-        </button>
+        <ButtonAdd />
+        <ButtonRemove />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ type BearStore = {
   dec: () => void;
 };
 
-export const useStore = create<BearStore>()(
+const useStoreCount = create<BearStore>()(
   devtools(
     persist(
       (set) => ({
@@ -19,3 +19,5 @@ export const useStore = create<BearStore>()(
     )
   )
 );
+
+export default useStoreCount;
